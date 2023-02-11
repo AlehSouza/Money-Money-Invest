@@ -1,4 +1,5 @@
 import './styles.scss'
+import Image from 'next/image'
 
 export default function Request(props) {
     return (
@@ -11,7 +12,7 @@ export default function Request(props) {
                 </div>
                 
                     <button>
-                        <img src="/arrow-r.png"/>
+                        <Image width="8" height="12" alt="arrow-r" src="/arrow-r.png"/>
                     </button>
             </div>
         </a>

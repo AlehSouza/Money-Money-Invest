@@ -2,6 +2,7 @@ import Spinner from '@/components/Spinner';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Image from 'next/image';
 import './styles.scss'
 
 export default function EditLoan() {
@@ -49,7 +50,7 @@ export default function EditLoan() {
         })
         .then(response => response.json())
         .then(data => {
-            setLoading(false)
+            disableLoading()
             setLoan(data)
             console.log(data)
         })
@@ -66,94 +67,97 @@ export default function EditLoan() {
 
     return (
         <main className="main">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="btn-back" onClick={() => handleBackButton()}>
-                    <img src="/arrow.png" alt="arrow"/>
-                    <span>Voltar</span>
-                </div>
-                <h2>Adicionar nova solicitação</h2>
-                <div className="line-break"/>
-                <label>Nome da empresa</label>
-                <input type="text" defaultValue={company} placeholder="Nome da empresa" {...register("company", {required: true, maxLength: 80})} />
-                <label>Faturamento anual</label>
-                <input type="number" defaultValue={annualBilling} placeholder="Faturamento Anual" {...register("annualBilling", {required: true, maxLength: 80})} />
-                <label>Valor solicitado</label>
-                <input type="number" defaultValue={requestedAmount} placeholder="Valor Solicitado" {...register("requestedAmount", {required: true, maxLength: 80})} />
-                <br/>
-                <h3>Endereço</h3>
-                <div className="line-break"/>
+            {
+                loading ? <Spinner/> : 
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="btn-back" onClick={() => handleBackButton()}>
+                        <Image width="16" height="16" src="/arrow.png" alt="arrow"/>
+                        <span>Voltar</span>
+                    </div>
+                    <h2>Adicionar nova solicitação</h2>
+                    <div className="line-break"/>
+                    <label>Nome da empresa</label>
+                    <input type="text" defaultValue={company} placeholder="Nome da empresa" {...register("company", {required: true, maxLength: 80})} />
+                    <label>Faturamento anual</label>
+                    <input type="number" defaultValue={annualBilling} placeholder="Faturamento Anual" {...register("annualBilling", {required: true, maxLength: 80})} />
+                    <label>Valor solicitado</label>
+                    <input type="number" defaultValue={requestedAmount} placeholder="Valor Solicitado" {...register("requestedAmount", {required: true, maxLength: 80})} />
+                    <br/>
+                    <h3>Endereço</h3>
+                    <div className="line-break"/>
 
-                <label>CEP</label>
-                <input type="text" defaultValue={zipCode} placeholder="CEP" {...register("zipCode", { maxLength: 80})} />
-                <div className="address">
-                    <div>
-                        <label>Rua</label>
-                        <input type="text" defaultValue={street} placeholder="Rua" {...register("street", { maxLength: 80})} />
+                    <label>CEP</label>
+                    <input type="text" defaultValue={zipCode} placeholder="CEP" {...register("zipCode", { maxLength: 80})} />
+                    <div className="address">
+                        <div>
+                            <label>Rua</label>
+                            <input type="text" defaultValue={street} placeholder="Rua" {...register("street", { maxLength: 80})} />
+                        </div>
+                        <div>
+                            <label>Número</label>
+                            <input type="text" defaultValue={number} placeholder="Número" {...register("number", { maxLength: 80})} />
+                        </div>
                     </div>
-                    <div>
-                        <label>Número</label>
-                        <input type="text" defaultValue={number} placeholder="Número" {...register("number", { maxLength: 80})} />
+                    <div className="address state">
+                        <div>
+                            <label>Cidade</label>
+                            <input type="text" defaultValue={city} placeholder="Cidade" {...register("city", { maxLength: 80})} />
+                        </div>
+                        <div>
+                            <label>Estado</label>
+                            <select {...register("state")} >
+                                <option selected disabled hidden>Estado (UF)</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                                <option value="EX">Estrangeiro</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div className="address state">
-                    <div>
-                        <label>Cidade</label>
-                        <input type="text" defaultValue={city} placeholder="Cidade" {...register("city", { maxLength: 80})} />
-                    </div>
-                    <div>
-                        <label>Estado</label>
-                        <select {...register("state")} >
-                            <option selected disabled hidden>Estado (UF)</option>
-                            <option value="AC">Acre</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espírito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
-                            <option value="EX">Estrangeiro</option>
-                        </select>
-                    </div>
-                </div>
-                <br/>
-                <h3>Contato</h3>
-                <div className="line-break"/>
-                <label>Nome Completo</label>
-                <input type="text" defaultValue={fullName} placeholder="Nome completo do responsável pela empresa" {...register("fullName", {required: true, maxLength: 80})} />
-                <label>Telefone de Contato</label>
-                <input type="tel" defaultValue={phoneNumber} placeholder="Telefone Contato" {...register("phoneNumber", {required: true, maxLength: 80})} />
-                <label>Email</label>
-                <input type="email" defaultValue={email} placeholder="Email" {...register("email", {required: true, maxLength: 80})} />
-                <label>CPF</label>
-                <input type="text" defaultValue={document} placeholder="CPF" {...register("document", {required: true, maxLength: 80})} />
-                <br/>
+                    <br/>
+                    <h3>Contato</h3>
+                    <div className="line-break"/>
+                    <label>Nome Completo</label>
+                    <input type="text" defaultValue={fullName} placeholder="Nome completo do responsável pela empresa" {...register("fullName", {required: true, maxLength: 80})} />
+                    <label>Telefone de Contato</label>
+                    <input type="tel" defaultValue={phoneNumber} placeholder="Telefone Contato" {...register("phoneNumber", {required: true, maxLength: 80})} />
+                    <label>Email</label>
+                    <input type="email" defaultValue={email} placeholder="Email" {...register("email", {required: true, maxLength: 80})} />
+                    <label>CPF</label>
+                    <input type="text" defaultValue={document} placeholder="CPF" {...register("document", {required: true, maxLength: 80})} />
+                    <br/>
 
-                <button type="submit">
-                    {
-                        loading ? <Spinner/> :  <span>Editar</span>
-                    }
-                </button>
-            </form>
+                    <button type="submit">
+                        {
+                            loading ? <Spinner/> :  <span>Editar</span>
+                        }
+                    </button>
+                </form>
+            }
         </main>
     )
 }

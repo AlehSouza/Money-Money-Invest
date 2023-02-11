@@ -2,6 +2,7 @@ import './styles.scss'
 import { useRouter } from 'next/router';
 import Spinner from '@/components/Spinner';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function DetailsLoan() {
@@ -52,14 +53,14 @@ export default function DetailsLoan() {
                 loading ? <Spinner /> :
                     <div className="details">
                         <div className="btn-back" onClick={handleBackButton}>
-                            <img src="/arrow.png" alt="arrow" />
+                            <Image width="16" height="16" src="/arrow.png" alt="arrow" />
                             <span>Voltar</span>
                         </div>
                         <h2>Detalhes</h2>
                         <div className="details-remove">
                             <h3>{company|| 'Não registrado'}</h3>
                             <div>
-                                <img src="/trash.png" />
+                                <Image width="11" height="12" src="/trash.png" alt="trash"/>
                                 <span>Remover solicitação</span>
                             </div>
                         </div>

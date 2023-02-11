@@ -1,5 +1,7 @@
 import Request from '@/components/Request/'
 import Spinner from '@/components/Spinner'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import './style.scss'
 
@@ -39,7 +41,7 @@ export default function ListLoan() {
             <div className="container">
                 <div className="header">
                     <div className="icon">
-                        <img src="/alex_sanchez.png"/>
+                        <Image width="64" height="64" src="/alex_sanchez.png" alt="Icon"/>
                     </div>
                     <div className="header-infos">
                         <span>Seja bem-vindo</span>
@@ -47,20 +49,20 @@ export default function ListLoan() {
                     </div>
                     <div className="header-notifications">
                         <div className="badge">1</div>
-                        <img src="/bell.png"/>
+                        <Image src="/bell.png" width="18" height="21" alt="Notifications"/>
                     </div>
                 </div> 
                 <div className="search">
                     <div className="opportunities">
                         <h1>Oportunidades</h1>
                         <div>
-                            <a href='/loan/new'>
+                            <Link href='/loan/new'>
                                 +
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="opportunities-search">
-                        <img src="/lens.png"/>
+                        <Image src="/lens.png" width="20" height="20" alt="Lens"/>
                         <input type="text" placeholder="Busque uma oportunidade"/>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import './styles.scss'
 import { useForm } from 'react-hook-form';
 import { useRouter  } from 'next/router';
 import { useState } from 'react';
+import Image from 'next/image';
 import Spinner from '@/components/Spinner';
 
 export default function NewLoan() {
@@ -42,7 +43,7 @@ export default function NewLoan() {
         <main className="main">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="btn-back" onClick={() => handleBackButton()}>
-                    <img src="/arrow.png" alt="arrow"/>
+                    <Image width="16" height="16" src="/arrow.png" alt="arrow"/>
                     <span>Voltar</span>
                 </div>
                 <h2>Adicionar nova solicitação</h2>

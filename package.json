@@ -1,0 +1,23 @@
+{
+  "name": "money-money-investt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "json-server": "json-server --watch ./data/db.json --port 3004"
+  },
+  "dependencies": {
+    "@next/font": "13.1.6",
+    "eslint": "8.33.0",
+    "eslint-config-next": "13.1.6",
+    "json-server": "^0.17.1",
+    "next": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.1",
+    "sass": "^1.58.0"
+  }
+}

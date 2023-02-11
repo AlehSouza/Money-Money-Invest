@@ -1,0 +1,34 @@
+{
+  "creditRequests": [
+    {
+      "company": "Money Money Invest",
+      "annualBilling": "36000",
+      "requestedAmount": "3000",
+      "zipCode": "08150020",
+      "street": "José Pessota",
+      "number": "593",
+      "city": "São Paulo",
+      "state": "SP",
+      "fullName": "Alexandre Souza",
+      "phoneNumber": "11983674446",
+      "email": "alexandrehg2001@gmail.com",
+      "document": "49496924883",
+      "id": 1
+    },
+    {
+      "company": "Empresa não cadastrada",
+      "annualBilling": "36000",
+      "requestedAmount": "3000",
+      "zipCode": "",
+      "street": "",
+      "number": "",
+      "city": "",
+      "state": "",
+      "fullName": "",
+      "phoneNumber": "",
+      "email": "",
+      "document": "49496924883",
+      "id": 2
+    }
+  ]
+}

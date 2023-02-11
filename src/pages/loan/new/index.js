@@ -12,7 +12,7 @@ export default function NewLoan() {
 
     const disableLoading = () => setTimeout(() => {
         setLoading(false)
-        router.push('/list-loan')
+        router.push('/loan')
     }, 1000);
 
     const onSubmit = data => {

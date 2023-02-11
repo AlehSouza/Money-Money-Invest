@@ -28,9 +28,9 @@ export default function DetailsLoan() {
         })
         .then(response => response.json())
         .then(data => {
-            disableLoading()
             console.log(data)
             setLoan(data)
+            disableLoading()
         })
         .catch(error => {
             disableLoading()
@@ -78,8 +78,8 @@ export default function DetailsLoan() {
                         <div className="line-break"></div>
                         <span>Endereço</span>
                         <label>
-                            {street || '-'}, 
-                            {number || '-' }, 
+                            {street || '-'},&nbsp; 
+                            {number || '-' },&nbsp;
                             {city|| '-'} - 
                             {state|| '-'}
                         </label>

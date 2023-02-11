@@ -6,15 +6,11 @@ import Image from 'next/image';
 import './styles.scss'
 
 export default function EditLoan() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const router = useRouter();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const [ loading, setLoading ] = useState(false);
     const [ loan, setLoan ] = useState({})
-    const router = useRouter();
     const {id} = router.query
-
-    const {annualBilling, city, company, document, email, fullName, number, phoneNumber, requestedAmount, state, street, zipCode } = loan
-
-    console.log(id)
 
     const disableLoading = () => setTimeout(() => {
         setLoading(false)
@@ -52,7 +48,9 @@ export default function EditLoan() {
         .then(data => {
             disableLoading()
             setLoan(data)
-            console.log(data)
+            Object.keys(data).map((key) =>{
+                setValue(key, data[key])
+            })
         })
     }
 
@@ -61,51 +59,82 @@ export default function EditLoan() {
     }
 
     useEffect(() => {
-        getRequest()
+        if(id) {
+            getRequest()
+        }
     }, [id]) 
-
 
     return (
         <main className="main">
             {
                 loading ? <Spinner/> : 
                 <form onSubmit={handleSubmit(onSubmit)}>
+                    
                     <div className="btn-back" onClick={() => handleBackButton()}>
                         <Image width="16" height="16" src="/arrow.png" alt="arrow"/>
                         <span>Voltar</span>
                     </div>
+
                     <h2>Adicionar nova solicitação</h2>
                     <div className="line-break"/>
                     <label>Nome da empresa</label>
-                    <input type="text" defaultValue={company} placeholder="Nome da empresa" {...register("company", {required: true, maxLength: 80})} />
+                    <input 
+                        type="text" 
+                        placeholder="Nome da empresa"
+                        {...register("company", {required: true, maxLength: 80})} 
+                    />
                     <label>Faturamento anual</label>
-                    <input type="number" defaultValue={annualBilling} placeholder="Faturamento Anual" {...register("annualBilling", {required: true, maxLength: 80})} />
+                    <input 
+                        type="number" 
+                        placeholder="Faturamento Anual" 
+                        {...register("annualBilling", {required: true, maxLength: 80})} 
+                    />
                     <label>Valor solicitado</label>
-                    <input type="number" defaultValue={requestedAmount} placeholder="Valor Solicitado" {...register("requestedAmount", {required: true, maxLength: 80})} />
+                    <input 
+                        type="number" 
+                        placeholder="Valor Solicitado" 
+                        {...register("requestedAmount", {required: true, maxLength: 80})} 
+                    />
                     <br/>
+
                     <h3>Endereço</h3>
                     <div className="line-break"/>
-
                     <label>CEP</label>
-                    <input type="text" defaultValue={zipCode} placeholder="CEP" {...register("zipCode", { maxLength: 80})} />
+                    <input 
+                        type="text" 
+                        placeholder="CEP" 
+                        {...register("zipCode", { maxLength: 80})} 
+                    />
                     <div className="address">
                         <div>
                             <label>Rua</label>
-                            <input type="text" defaultValue={street} placeholder="Rua" {...register("street", { maxLength: 80})} />
+                            <input 
+                                type="text" 
+                                placeholder="Rua" 
+                                {...register("street", { maxLength: 80})} 
+                            />
                         </div>
                         <div>
                             <label>Número</label>
-                            <input type="text" defaultValue={number} placeholder="Número" {...register("number", { maxLength: 80})} />
+                            <input 
+                                type="text" 
+                                placeholder="Número" 
+                                {...register("number", { maxLength: 80})} 
+                            />
                         </div>
                     </div>
                     <div className="address state">
                         <div>
                             <label>Cidade</label>
-                            <input type="text" defaultValue={city} placeholder="Cidade" {...register("city", { maxLength: 80})} />
+                            <input 
+                                type="text" 
+                                placeholder="Cidade" 
+                                {...register("city", { maxLength: 80})} 
+                            />
                         </div>
                         <div>
                             <label>Estado</label>
-                            <select {...register("state")} >
+                            <select {...register("state")}>
                                 <option selected disabled hidden>Estado (UF)</option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
@@ -139,16 +168,33 @@ export default function EditLoan() {
                         </div>
                     </div>
                     <br/>
+
                     <h3>Contato</h3>
                     <div className="line-break"/>
                     <label>Nome Completo</label>
-                    <input type="text" defaultValue={fullName} placeholder="Nome completo do responsável pela empresa" {...register("fullName", {required: true, maxLength: 80})} />
+                    <input 
+                        type="text" 
+                        placeholder="Nome completo do responsável pela empresa" 
+                        {...register("fullName", {required: true, maxLength: 80})} 
+                    />
                     <label>Telefone de Contato</label>
-                    <input type="tel" defaultValue={phoneNumber} placeholder="Telefone Contato" {...register("phoneNumber", {required: true, maxLength: 80})} />
+                    <input 
+                        type="tel" 
+                        placeholder="Telefone Contato" 
+                        {...register("phoneNumber", {required: true, maxLength: 80})} 
+                    />
                     <label>Email</label>
-                    <input type="email" defaultValue={email} placeholder="Email" {...register("email", {required: true, maxLength: 80})} />
+                    <input 
+                        type="email" 
+                        placeholder="Email" 
+                        {...register("email", {required: true, maxLength: 80})} 
+                    />
                     <label>CPF</label>
-                    <input type="text" defaultValue={document} placeholder="CPF" {...register("document", {required: true, maxLength: 80})} />
+                    <input 
+                        type="text" 
+                        placeholder="CPF" 
+                        {...register("document", {required: true, maxLength: 80})} 
+                    />
                     <br/>
 
                     <button type="submit">
@@ -156,6 +202,7 @@ export default function EditLoan() {
                             loading ? <Spinner/> :  <span>Editar</span>
                         }
                     </button>
+
                 </form>
             }
         </main>

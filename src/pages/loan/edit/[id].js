@@ -9,7 +9,6 @@ export default function EditLoan() {
     const router = useRouter();
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const [ loading, setLoading ] = useState(false);
-    const [ loan, setLoan ] = useState({})
     const {id} = router.query
 
     const disableLoading = () => setTimeout(() => {
@@ -28,7 +27,7 @@ export default function EditLoan() {
         .then(response => response.json())
         .then(data => {
             disableLoading()
-            console.log(data)
+            router.push(`/loan/${id}`)
         })
         .catch(error => {
             disableLoading()
@@ -46,11 +45,10 @@ export default function EditLoan() {
         })
         .then(response => response.json())
         .then(data => {
-            disableLoading()
-            setLoan(data)
             Object.keys(data).map((key) =>{
                 setValue(key, data[key])
             })
+            disableLoading()
         })
     }
 

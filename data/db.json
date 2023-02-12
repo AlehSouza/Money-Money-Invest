@@ -14,36 +14,6 @@
       "email": "alexandrehg2001@gmail.com",
       "document": "49496924883",
       "id": 1
-    },
-    {
-      "company": "Empresa não cadastrada",
-      "annualBilling": "36000",
-      "requestedAmount": "3000",
-      "zipCode": "",
-      "street": "",
-      "number": "",
-      "city": "",
-      "state": "",
-      "fullName": "",
-      "phoneNumber": "",
-      "email": "",
-      "document": "49496924883",
-      "id": 2
-    },
-    {
-      "company": "Empresa fictícia",
-      "annualBilling": "100000",
-      "requestedAmount": "100000",
-      "zipCode": "08.150-020",
-      "street": "Rua José pessota",
-      "number": "593",
-      "city": "SÃO PAULO",
-      "state": "SP",
-      "fullName": "Alexandre Henrique Gabino de Souza",
-      "phoneNumber": "11983674446",
-      "email": "alexandrehg2001@gmail.com",
-      "document": "49496924883",
-      "id": 3
     }
   ]
 }

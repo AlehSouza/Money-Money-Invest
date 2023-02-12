@@ -18,6 +18,23 @@ export default function DetailsLoan() {
         }, 1000);
     }
 
+    const deleteLoan = () => {
+        fetch(`http://localhost:3004/creditRequests/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(() => {
+            router.push('/loan')
+        })
+        .catch(error => {
+            disableLoading()
+            console.log(error)
+        })
+    }
+
     const getLoan = () => {
         setLoading(true)
         fetch(`http://localhost:3004/creditRequests/${id}`, {
@@ -59,7 +76,7 @@ export default function DetailsLoan() {
                         <h2>Detalhes</h2>
                         <div className="details-remove">
                             <h3>{company|| 'Não registrado'}</h3>
-                            <div>
+                            <div onClick={() => deleteLoan()}>
                                 <Image width="11" height="12" src="/trash.png" alt="trash"/>
                                 <span>Remover solicitação</span>
                             </div>
@@ -80,7 +97,7 @@ export default function DetailsLoan() {
                         <label>
                             {street || '-'},&nbsp; 
                             {number || '-' },&nbsp;
-                            {city|| '-'} - 
+                            {city|| '-'} -&nbsp;
                             {state|| '-'}
                         </label>
                         <span>CEP</span>

@@ -4,7 +4,7 @@ Essa é a minha aplicação feita em [Next.js](https://nextjs.org/) projetada pa
 
 Primeiro, rodando o servidor de desenvolvimento:
 
-( Se preferir você acessar o site já hospedado na Vercel com um build para produção: https://money-money-invest.vercel.app/loan )
+( Se preferir você acessar o site já hospedado na Vercel com um build para produção: https://money-money-invest.vercel.app/loan  Obs: Lembrando que mesmo hospedado o site ainda ouve a API do localhost:3004.)
 
 ```bash
 npm run dev

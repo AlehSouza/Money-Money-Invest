@@ -7,10 +7,13 @@ import './style.scss'
 
 export default function ListLoan() {
     const [ loading, setLoading ] = useState(false)
+    const [ search, setSearch ] =  useState('')
+    const [ filteredRequests, setFilteredRequests ] = useState([])
+    const [ requests, setRequests ] = useState([])
+
     const disableLoading = () => setTimeout(() => {
         setLoading(false) 
     }, 2000);
-    const [ requests, setRequests ] = useState([])
 
     const getRequests = async() => {
         setLoading(true)
@@ -29,6 +32,19 @@ export default function ListLoan() {
             disableLoading()
             console.log(error)
         });
+    }
+
+    const handleSearch = (value) => {
+        setSearch(value)
+        if(search != '') {
+            const filteredData = requests.filter(item => {
+                return Object.values(item).join('').toLowerCase().includes(search.toLowerCase())
+            })
+            setFilteredRequests(filteredData)
+        }
+        else {
+            setFilteredRequests(requests)
+        }
     }
 
     useEffect(() => {
@@ -63,12 +79,16 @@ export default function ListLoan() {
                     </div>
                     <div className="opportunities-search">
                         <Image src="/lens.png" width="20" height="20" alt="Lens"/>
-                        <input type="text" placeholder="Busque uma oportunidade"/>
+                        <input type="text" placeholder="Busque uma oportunidade" onChange={(e) => handleSearch(e.target.value)}/>
                     </div>
                 </div>
                 <div className="list-opportunities">
                     {
-                        loading ? <Spinner/> : requests.map(request => <Request request={request} key={request.id}/>)
+                        loading ? <Spinner/> : search.length > 1 
+                        ? filteredRequests.map(request => 
+                            <Request request={request} key={request.id}/>) 
+                            : requests.map(request => 
+                                <Request request={request} key={request.id}/>)
                     }
                 </div>
             </div>
